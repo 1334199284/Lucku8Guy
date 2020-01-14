@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<title>leg-tree</title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="font/iconfont.css" />
+	</head>
+	<style>
+		.tree {
+			border: 1px solid black;
+			width: 600px;
+			height: 100vh;
+			display: block;
+			margin: auto;
+			overflow-y: scroll;
+			overflow-x: scroll;
+			position: relative;
+			padding-left: 20px;
+		}
+		
+		a {
+			text-decoration: none;
+			color: #434b5a;
+		}
+		
+		.synTree .iconxiangyou{
+			cursor: pointer;
+		}
+		.synTree span{
+			position: relative;
+		    top: -6px;
+		    left: 10px;
+		    color: #010102;
+	        cursor: default;
+		}
+		.leg_tree li {
+			list-style-type: none;
+			margin-left: -10px;
+			position: relative;
+			line-height: 22px;
+		}
+		
+		.leg_tree li a{
+			position: absolute;
+			top: -4px;
+			padding: 0px 10px;
+		}
+		.iconxiangyou{
+		    position: absolute;
+		    top: -5px;
+		    left: -10px;
+		}
+		.leg_tree li i{
+			font-size: 14px;
+		}
+		.leg_tree li i~i:before{
+			position: relative;
+		    top: -3px;
+		    left: 5px;
+		}
+		.tree input{cursor: pointer;}
+		.tree span {
+			font-size: 13px;
+			cursor: pointer;
+			display: inline-block;
+			border: 1px solid #e2e2e2;
+			width: 10px;
+			line-height: 8px;
+			text-align: center;
+			height: 10px;
+			background-color: whitesmoke;
+			position: absolute;
+			left: 8px;
+			top: 4px;
+		}
+		.tree ul span{
+			left: -16px;
+		}
+		.tree ul {
+			list-style-type: none;
+			margin-top: 0px;
+			position: relative;
+		}
+		
+		.label{
+			width: 14px;
+			height: 14px;
+			display: inline-flex;
+			border: 1px solid #a5a5a5;
+			border-radius: 3px;
+		}
+		.label i {
+		    color: #0095ff;
+		    position: absolute;
+		    top: -2px;
+		    left: -1px;
+		    font-size: 18px!important;
+		}
+		.label:hover {
+			box-shadow: 0 0 4px 0px #a0aefb;
+		}
+		/*.label i:hover {
+			box-shadow: 0 0 4px 0px #a0aefb;
+		}*/
+		.isShow{
+			position: absolute;
+			top: -3px;
+			left: -20px;
+		}
+		input{
+			display: none;
+		}
+		.isShow{
+			width: 14px;
+			margin-right: 5px;
+		}
+		
+		
+		
+		.tree1{
+			position: fixed;
+			top: 20px;
+		}
+	</style>
+	<body>
+		<!-- <h1>最外面的class tree 需要不一样</h1> -->
+		<div class="tree">
+		</div>
+		 <div class="tree1"> 
+		</div>
+		<button id="demo">获取选中数据</button>
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="leg-tree.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var data = [{
+			"name": "所有权限123",
+			"open": true,
+			"id": 999,
+			"ico": 'iconyonghu',
+			"checked": false,
+			"children": [{
+					"name": "储物柜管理",
+					"open": true,
+					"ico": 'iconshezhi',
+					"id": 99,
+					"checked": false,
+					"children": [{
+							"name": "储物柜列表",
+							"id": 1,
+							"ico": 'icon-sousuo',
+							"checked": false,
+							"open": false,
+							"children": [{
+									"name": "详情",
+									"id": 7,
+									"ico": false,
+									"checked": true
+								},
+								{
+									"name": "修改价格",
+									"id": 43,
+									"ico": false,
+									"checked": false
+								}
+							]
+						},
+						{
+							"name": "计费类型",
+							"id": 36,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": [{
+									"name": "删除",
+									"id": 37,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "提交编辑",
+									"id": 52,
+									"ico": false,
+									"checked": false
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "广告业务",
+					"open": true,
+					"ico": false,
+					"id": 999,
+					"checked": false,
+					"children": [{
+							"name": "广告列表",
+							"id": 22,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": [{
+									"name": "编辑",
+									"id": 23,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "添加",
+									"id": 24,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "删除",
+									"id": 25,
+									"ico": false,
+									"checked": false
+								}
+							]
+						},
+						{
+							"name": "广告资源",
+							"id": 26,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": [{
+									"name": "编辑",
+									"id": 27,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "上传",
+									"id": 28,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "删除",
+									"id": 29,
+									"ico": false,
+									"checked": false
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "个人中心",
+					"open": true,
+					"ico": false,
+					"checked": false,
+					"children": [{
+							"name": "资料修改",
+							"id": 5,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": []
+						},
+						{
+							"name": "密码修改",
+							"id": 6,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": []
+						},
+						{
+							"name": "资金账户",
+							"id": 41,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": [{
+									"name": "资金账户绑定微信",
+									"id": 39,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "资金账户绑定支付宝",
+									"id": 40,
+									"ico": false,
+									"checked": false
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "日志管理",
+					"open": true,
+					"ico": false,
+					"checked": false,
+					"children": [{
+							"name": "错误日志",
+							"id": 30,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": [{
+									"name": "详情",
+									"id": 31,
+									"ico": false,
+									"checked": false
+								},
+								{
+									"name": "删除",
+									"id": 32,
+									"ico": false,
+									"checked": false
+								}
+							]
+						},
+						{
+							"name": "操作日志",
+							"id": 33,
+							"ico": false,
+							"checked": false,
+							"open": false,
+							"children": []
+						}
+					]
+				},
+				{
+					"name": "消息推送",
+					"open": false,
+					"ico": false,
+					"checked": false,
+					"children": [{
+							"name": "普通消息",
+							"id": 34,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": []
+						},
+						{
+							"name": "图文消息",
+							"id": 35,
+							"ico": false,
+							"checked": false,
+							"open": true,
+							"children": []
+						}
+					]
+				}
+			]
+		}];
+
+		var arrs = []
+		// var arrs = [1, 2, 3, 48, 5, 6, 7, 8, 9, 10]
+
+		/*
+		生成tree的位置 data为tree数据、arrs为选中的id可为空
+		arrs可填可不填 填写需为数组
+		data数据中的只有name、id、checked、open、ico、children
+			其中open为是否展开	
+		*/
+
+		$("#demo").on("click", () => {
+			alert(leg.getCheckedNodes())//选中
+			console.log(leg.getHalfSelected())//半选
+			console.log(leg.getAll());//全选及半选
+		})
+		leg.tree({
+			ele:".tree",//选者
+			data:data,//数据
+			arrs:arrs,//选中的id
+			cascade:true,//级联
+//			onAsync:true//暂无此
+		});
+		leg.synTree({
+			ele:".tree1",
+			url:"./tree.json",
+			dataStyle:(res)=>{//修改后台返回的数据格式
+				return res.list;
+			},
+			getData:(id,name)=>{//返回的id和标题
+				console.log(id+"======"+name)
+			}
+		});
+	</script>
+
+</html>

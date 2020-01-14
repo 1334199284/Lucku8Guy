@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+	<body>
+		<style>
+			#leg-select{
+				display: none;
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+				width: 100%;
+				height: 300px;
+				background-color: white;
+				z-index: 1;
+			}
+			.leg-select-head{
+				height: 20px;
+				border-bottom: 1px solid #e2e2e2;
+				
+			}
+			ul{margin: 0;padding: 0;}
+			ul li{
+				list-style-type: none;
+				border-bottom: 1px solid #e2e2e2;
+			}
+			.leg-souce{position: relative;overflow-y: scroll;height: 300px;}
+			.leg-souce a{padding: 0px 10px;}
+			.leg-souce li{
+				display: block;
+				line-height: 40px;
+				text-align: left;
+			}
+			.leg-souce-children{
+				width: 100%;
+				height: 300px;
+				z-index: 2;
+				position: absolute;
+				top: 0px;
+				background-color: white;
+			}
+			.leg-select-head{
+				height: 40px;
+				line-height: 40px;
+				width: 100%;
+			}
+			.leg-select-head span{
+				width: 80%;
+			    display: inline-block;
+			    text-align: center;
+			}
+			.leg-back{width: 8%!important;}
+			.leg-close{width: 8%!important;}
+			
+			
+			.active{
+			    background-color: #5FB878;
+			    color: white;
+			}
+
+			/*公*/
+			.leg-ellipsis{
+				/*超出部分省略*/
+				overflow: hidden;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+			}
+			.leg-shade{
+				width: 100%;
+				height: 100vh;
+				position: fixed;
+				top: 0;
+				left: 0;
+				background-color: rgba(0,0,0,.5);
+			}
+			
+			
+			
+			.layui-input{
+			    height: 33px;
+			    line-height: 1.3;
+			    border-width: 1px;
+			    border-style: solid;
+			    background-color: #fff;
+			    border-radius: 2px;
+			    border-color: #e6e6e6;
+			}
+			.layui-form-item .layui-input-inline {
+			    float: left;
+			    width: 190px;
+			    margin-right: 10px;
+			}
+			.layui-form-label {
+			    float: left;
+			    display: block;
+			    padding: 9px 15px;
+			    width: 80px;
+			    font-weight: 400;
+			    line-height: 20px;
+			    text-align: right;
+			}
+		</style>
+		<div class="layui-form-item" style="margin: 20px 20px 0 -40px;">
+			<label class="layui-form-label">联动:</label>
+			<div class="layui-input-inline">
+				<input id="demo" class="layui-input" type="text" />
+			</div>
+		</div>
+		<script src="leg-select.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var data = [{
+				value: "0",
+				text: "1",
+				children: [{
+					value: "1",
+					text: "11"
+				}, ]
+			},{
+				value: "1",
+				text: "cx",
+				children: [{
+					value: "1",
+					text: "2"
+				}, ]
+			},{
+				value: "2",
+				text: "3",
+				children: [{
+					value: "1",
+					text: "31"
+				}, ]
+			},{
+				value: "3",
+				text: "aweg",
+				children: [{
+					value: "1",
+					text: "aw"
+				}, ]
+			}, {
+				value: "12",
+				text: "dfgasdg",
+				children: [{
+					value: "3",
+					text: "asdgsd"
+				}, ]
+			}, {
+				value: "29",
+				text: "12312",
+				children: [{
+					value: "5",
+					text: "萨德"
+				}, {
+					value: "8",
+					text: "asd"
+				}, {
+					value: "10",
+					text: "asd23"
+				}, {
+					value: "11",
+					text: "SD卡公司的gas递过来撒的快感会死啊低功耗问哦黑"
+				}, {
+					value: "12",
+					text: "士大夫撒啊发生发撒阿萨德"
+				}, {
+					value: "13",
+					text: "士大夫撒啊发生发的撒阿萨德"
+				}, {
+					value: "14",
+					text: "士大夫撒啊请问王发生发的撒阿萨德"
+				}, {
+					value: "15",
+					text: "士大夫撒啊请问12额王发生发的撒阿萨德"
+				}, ]
+			}, {
+				value: "14",
+				text: "测试2222",
+				children: []
+			}, {
+				value: "15",
+				text: "ssd",
+				children: [{
+					value: "4",
+					text: "LEG"
+				}, ]
+			}, ];
+			
+			//调用js
+			$.leg_select({
+				data:data,
+				id:"#demo",
+				name:"demo",
+			});
+		</script>
+	</body>
+</html>

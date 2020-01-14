@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		.box {
+			width: 600px;
+			height: 100%;
+			border: 1px solid gainsboro;
+		}
+
+		form input {
+			display: block;
+			margin: 10px;
+			height: 30px;
+			width: 230px;
+			font-size: 14px;
+			background: #fff;
+			text-align: left;
+			line-height: 30px;
+			border-radius: 3px;
+			padding-left: 10px;
+			border: 1px solid #ccc;
+		}
+
+		.question {
+			margin-left: 10px;
+			display: flex;
+			justify-content: flex-end;
+			/* justify-content: space-between; */
+		}
+
+		.content {
+			margin-left: 10px;
+		}
+
+		button {
+			height: 30px;
+			width: 100px;
+			background: #fff;
+			margin: 10px;
+			border-radius: 3px;
+			border: 1px solid #ccc;
+		}
+
+		.content b {
+			float: left;
+			padding: 16px 3px;
+		}
+
+		.choose {
+			margin-left: 20px;
+		}
+
+		.choose button {
+			margin: 0;
+			padding: 0;
+			width: 60px;
+		}
+
+		.choose button:hover {
+			color: #01AAED;
+		}
+
+		.choose button:first-child {
+			border-right: 0;
+			border-radius: 3px 0 0 3px;
+		}
+
+		.choose button:last-child {
+			margin-left: -5px;
+			border-radius: 0 3px 3px 0;
+		}
+
+		.check {
+			border: 1px solid #01AAED !important;
+			box-shadow: 0px 1px 5px #90d6fa;
+			position: sticky;
+			color: #01AAED;
+			z-index: 99;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<form id="form">
+				<input type="text" name="asd" placeholder="请输入问卷名" />
+				<input type="text" name="asd1" placeholder="请输入问卷说明" />
+
+				<div class="title" leg-filter="title"></div>
+				
+				<button type="button" id="submit">提交</button>
+			</form>
+		</div>
+		<script src="../../source/js/jquery-3.3.1.js"></script>
+		<!-- <script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script> -->
+		<script type="text/javascript" src="jq.js"></script>
+		<script>
+			leg.survey({
+				ele:".title",//添加的class 或者 id
+				submit:"#submit",//提交按钮的id 或者 class	form标签内
+				form:"#form",// form 标签上的标志
+				name:"demo",//调查数据的名字	
+				getData:function(res){
+					console.log(res)
+				}
+			});
+		</script>
+	</body>
+</html>
