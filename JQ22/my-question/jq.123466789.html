@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../../source/js/jquery-3.3.1.js"></script>
+	</head>
+	<style type="text/css">
+		.box {
+			width: 600px;
+			height: 600px;
+			border: 1px solid gainsboro;
+		}
+
+		form input {
+			display: inline;
+			margin: 10px;
+			height: 30px;
+			width: 230px;
+			font-size: 14px;
+			background: #fff;
+			text-align: left;
+			line-height: 30px;
+			border-radius: 3px;
+			padding-left: 10px;
+			border: 1px solid #ccc;
+		}
+
+		.question {
+			margin-left: 50%;
+			/* display: flex; */
+			/* justify-content: flex-end; */
+			/* justify-content: space-between; */
+		}
+
+		.content {
+			margin-left: 10px;
+		}
+
+		button {
+			height: 30px;
+			width: 100px;
+			background: #fff;
+			margin: 10px;
+			border-radius: 3px;
+			border: 1px solid #ccc;
+		}
+
+		.content b {
+			float: left;
+			padding: 5px;
+		}
+
+		.choose {
+			margin-left: 20px;
+		}
+
+		.choose button {
+			margin: 0;
+			padding: 0;
+			width: 60px;
+		}
+
+		.choose button:hover {
+			color: #01AAED;
+		}
+
+		.choose button:first-child {
+			border-right: 0;
+			border-radius: 3px 0 0 3px;
+		}
+
+		.choose button:last-child {
+			margin-left: -5px;
+			border-radius: 0 3px 3px 0;
+		}
+
+		.check {
+			border: 1px solid #01AAED !important;
+			box-shadow: 0px 1px 5px #90d6fa;
+			position: sticky;
+			color: #01AAED;
+			z-index: 99;
+		}
+		
+		.del{
+			float: right;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<form id="form">
+				<input type="text" name="asd" placeholder="请输入问卷名" />
+				<input type="text" name="asd1" placeholder="请输入问卷说明" />
+
+				<div class="title">
+				</div>
+				<button type="button" id="submit">提交</button>
+			</form>
+		</div>
+		<script>
+			var html = '<div class="questions">';
+			html += '<div class="choose">';
+			html += '	<button type="button" data-type = "1" class="check">单选</button>';
+			html += '	<button type="button" data-type = "2" >多选</button>';
+			html += '</div>';
+			html += '<input type="text" style="display: none;" name="choose" value="1" class="chooseValue"/>';
+			html += '<input type="text" name="title" placeholder="问题内容" /><button type="button" class="del">删除</button>';
+			html += '<div class="content">';
+			html += '<div>';
+			html += '<input type="text" name="content" placeholder="选项内容" /><button type="button" class="del">删除</button>';
+			html += '</div>';
+			html += '</div>';
+			html += '<div class="question">';
+			html += '<button type="button" class="addQuestion">添加问题</button>';
+			html += '<button type="button" class="addContent">添加选项</button>';
+			html += '</div>';
+			html += '</div>';
+
+
+			$(".title").on("click", ".choose button", function() {
+				let arr = $(this).parent().find('button');
+				arr[0].className = "";
+				arr[1].className = "";
+				$(this)[0].className = "check"
+				console.log($(this).attr("data-type"))
+				$(this).parent().parent().find(".chooseValue").val($(this).attr("data-type"));
+			})
+
+
+			$(html).appendTo($(".title"));
+
+			$(".title").on("click", ".addQuestion", function() {
+				$(html).appendTo($(this).parent().parent().parent());
+			})
+
+			$(".title").on("click", ".addContent", function() {
+				$('<div><input type="text" name="content" placeholder="选项内容" /><button type="button" class="del">删除</button></div>')
+					.appendTo($(this).parent().parent()
+						.find(".content"));
+			})
+
+			$(".title").on("click", ".del", function() {
+				console.log(this)
+				console.log($(this).parent().remove())
+			})
+			
+			$("#submit").on("click", function() {
+				const result = $('#form').serializeArray();
+				var x = 0;
+				let params = [];
+				let temp = []; //children数据
+				for (var i = 0; i < result.length; i++) {
+					if (result[i].name == "title") {
+						x++;
+						const title = {}
+						title.title = result[i].value
+						title.num = result[i - 1].value
+						title.children = []
+						params.push(title);
+						temp = [];
+					} else if (x > 0) {
+						params[x - 1].children.push(result[i].value);
+					}
+				}
+				console.log(params)
+			})
+		</script>
+	</body>
+</html>
